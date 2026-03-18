@@ -20,9 +20,15 @@ $(document).ready(function() {
                 var line = lines[i];
 
                 function replaceColorCodes(str) {
-                    return str.replace(/\{([A-Fa-f0-9]{6})\}/g, function(match, p1) {
+                    str = str.replace(/\{([A-Fa-f0-9]{6})\}/g, function(match, p1) {
                         return '<span style="color: #' + p1 + ';">';
                     }).replace(/\{([A-Fa-f0-9]{6})\}/g, '</span>');
+
+                    // 2. Add this line to handle text between asterisks:
+                    // This finds *text*, and wraps it in <span class="me">text</span>
+                    str = str.replace(/\*(.*?)\*/g, '<span class="me">*$1*</span>');
+
+                    return str;
                 }
 
                 line = replaceColorCodes(line);
@@ -34,18 +40,20 @@ $(document).ready(function() {
 
             navigator.userAgent.indexOf("Chrome") != -1 && $(this).append(" ⠀");
 
-            formattedText.toLowerCase().indexOf("*") >= 0 && $(this).addClass("me");
+            formattedText.toLowerCase().indexOf("*") == 0 && $(this).addClass("me");
 
-            formattedText.toLowerCase().indexOf(" says:") >= 0 && $(this).addClass("white");
-            formattedText.toLowerCase().indexOf(" [low]:") >= 0 && $(this).addClass("grey");
+            formattedText.toLowerCase().indexOf("))") >= 0 && $(this).addClass("do");
+
+            formattedText.toLowerCase().indexOf(" mondja:") >= 0 && $(this).addClass("white");
+            formattedText.toLowerCase().indexOf(" suttogja:") >= 0 && $(this).addClass("grey");
 
             formattedText.toLowerCase().indexOf(", $") >= 0 && $(this).addClass("grey");
             formattedText.toLowerCase().indexOf("you have received $") >= 0 && $(this).addClass("grey");
 
             formattedText.toLowerCase().indexOf(" whispers:") >= 0 && $(this).addClass("whisper");
             formattedText.toLowerCase().indexOf(" whispers:") >= 0 && formattedText.toLowerCase().indexOf("(car)") >= 0 && $(this).addClass("carwhisper");
-            formattedText.toLowerCase().indexOf(" (phone)") >= 0 && $(this).addClass("whisper");
-            formattedText.toLowerCase().indexOf(":o<") >= 0 && $(this).addClass("whisper");
+            formattedText.toLowerCase().indexOf(" (telefon):") >= 0 && $(this).addClass("whisper");
+            formattedText.toLowerCase().indexOf(" mondja a megafonba:") >= 0 && $(this).addClass("whisper");
             formattedText.toLowerCase().indexOf(" (phone - low)") >= 0 && $(this).addClass("whisper");
 
             formattedText.toLowerCase().indexOf(" [san interview]") == 0 && $(this).addClass("news");
