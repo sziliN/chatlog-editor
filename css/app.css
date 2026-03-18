@@ -118,6 +118,10 @@ input {
     color: #c2a2da
 }
 
+.ame {
+    color: #956cb4
+}
+
 .do {
     color: #E02222
 }
@@ -381,7 +385,20 @@ pre.pre-scrollable {
     
     display: flex;
     flex-direction: column;
-    font-family: 'Arial', sans-serif;
+    font-family: 'Tahoma', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    font-smooth: never;
+    
+    /* This creates the "Outer Stroke" effect */
+    text-shadow: 
+        -1px -1px 0 #000,  
+         1px -1px 0 #000,
+        -1px  1px 0 #000,
+         1px  1px 0 #000;
+         
+    /* Prevents the browser from blurring the edges */
+    -webkit-font-smoothing: none;
     box-sizing: border-box; /* Prevents padding from breaking the width */
 }
 

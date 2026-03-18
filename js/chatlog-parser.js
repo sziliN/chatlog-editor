@@ -42,11 +42,14 @@ $(document).ready(function() {
 
             navigator.userAgent.indexOf("Chrome") != -1 && $(this).append(" ⠀");
 
-            formattedText.toLowerCase().indexOf("*") == 0 && $(this).addClass("me");
-            formattedText.toLowerCase().indexOf("***") == 0 && $(this).addClass("me");
+            if (formattedText.toLowerCase().startsWith('***')) {
+                $(this).addClass("me");
+            } 
+            else if (formattedText.toLowerCase().startsWith('*')) {
+                $(this).addClass("do");
+            }
 
-            formattedText.toLowerCase().endsWith("))") && $(this).addClass("do");
-
+            formattedText.toLowerCase().indexOf(">") == 0 && $(this).addClass("ame");
             formattedText.toLowerCase().indexOf(" mondja:") >= 0 && $(this).addClass("white");
             formattedText.toLowerCase().indexOf(" suttogja:") >= 0 && $(this).addClass("grey");
             formattedText.toLowerCase().indexOf(" (telefon):") >= 0 && $(this).addClass("whisper");
