@@ -26,7 +26,9 @@ $(document).ready(function() {
 
                     // 2. Add this line to handle text between asterisks:
                     // This finds *text*, and wraps it in <span class="me">text</span>
-                    str = str.replace(/\*(.*?)\*/g, '<span class="me">*$1*</span>');
+                    if (!str.trim().startsWith('*')) {
+                        str = str.replace(/\*(.*?)\*/g, '<span class="me">*$1*</span>');
+                    }
 
                     return str;
                 }
@@ -41,30 +43,16 @@ $(document).ready(function() {
             navigator.userAgent.indexOf("Chrome") != -1 && $(this).append(" ⠀");
 
             formattedText.toLowerCase().indexOf("*") == 0 && $(this).addClass("me");
+            formattedText.toLowerCase().indexOf("***") == 0 && $(this).addClass("me");
 
-            formattedText.toLowerCase().indexOf("))") >= 0 && $(this).addClass("do");
+            formattedText.toLowerCase().endsWith("))") && $(this).addClass("do");
 
             formattedText.toLowerCase().indexOf(" mondja:") >= 0 && $(this).addClass("white");
             formattedText.toLowerCase().indexOf(" suttogja:") >= 0 && $(this).addClass("grey");
-
-            formattedText.toLowerCase().indexOf(", $") >= 0 && $(this).addClass("grey");
-            formattedText.toLowerCase().indexOf("you have received $") >= 0 && $(this).addClass("grey");
-
-            formattedText.toLowerCase().indexOf(" whispers:") >= 0 && $(this).addClass("whisper");
-            formattedText.toLowerCase().indexOf(" whispers:") >= 0 && formattedText.toLowerCase().indexOf("(car)") >= 0 && $(this).addClass("carwhisper");
             formattedText.toLowerCase().indexOf(" (telefon):") >= 0 && $(this).addClass("whisper");
             formattedText.toLowerCase().indexOf(" mondja a megafonba:") >= 0 && $(this).addClass("whisper");
-            formattedText.toLowerCase().indexOf(" (phone - low)") >= 0 && $(this).addClass("whisper");
-
-            formattedText.toLowerCase().indexOf(" [san interview]") == 0 && $(this).addClass("news");
-            formattedText.toLowerCase().indexOf("[san interview]") == 0 && $(this).addClass("news");
-            formattedText.toLowerCase().indexOf(" **[ch:") == 0 && $(this).addClass("radio");
-            formattedText.toLowerCase().indexOf("**[ch:") == 0 && $(this).addClass("radio");
-
-            formattedText.toLowerCase().startsWith(" ** [") && formattedText.toLowerCase().includes("]") && /\[.*?\]/.test(formattedText) && $(this).addClass("dep");
-            formattedText.toLowerCase().startsWith("** [") && formattedText.toLowerCase().includes("]") && /\[.*?\]/.test(formattedText) && $(this).addClass("dep");
-
-
+            formattedText.toLowerCase().indexOf(")) megaphone:") >= 0 && $(this).addClass("whisper");
+            formattedText.toLowerCase().indexOf(" mondja rádióba:") >= 0 && $(this).addClass("radio");
 
             $(this).html(formattedText); 
 
