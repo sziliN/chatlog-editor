@@ -49,7 +49,7 @@ $(document).ready(function() {
                 $(this).addClass("do");
             }
 
-            formattedText.toLowerCase().indexOf(">") == 0 && $(this).addClass("ame");
+            formattedText.toLowerCase().indexOf(">>") == 0 && $(this).addClass("ame");
             formattedText.toLowerCase().indexOf(" mondja:") >= 0 && $(this).addClass("white");
             formattedText.toLowerCase().indexOf(" suttogja:") >= 0 && $(this).addClass("grey");
             formattedText.toLowerCase().indexOf(" suttogva:") >= 0 && $(this).addClass("grey");
