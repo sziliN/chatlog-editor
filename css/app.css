@@ -123,7 +123,7 @@ input {
 }
 
 .do {
-    color: #E02222
+    color: #ff2850
 }
 
 .death {
@@ -389,7 +389,7 @@ pre.pre-scrollable {
     font-size: 13px;
     font-weight: 700;
     font-smooth: never;
-    
+
     /* This creates the "Outer Stroke" effect */
     text-shadow: 
         -1px -1px 0 #000,  
