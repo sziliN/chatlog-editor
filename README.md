@@ -1,20 +1,19 @@
 # Chatlog Editor
 
-Chatlog Editor, converts MTA-SA/SA-MP logs into images, making screenshot editing easier.
+Chatlog Editor, MTA:SA logokat átalakít képekké átlátszó háttérrel, megkönnyítve az élménykép készítést.
+## Funkciók
 
-## Features
+* Kitörli a logban szereplő felesleges adatokat sor elején, ha jelen vannak.
 
-* Removes timestamps from screenshots. 
+* {} között lévő HEX színeket felhasználja.
 
-* If available, it detects and adjusts hexadecimal color codes within curly brackets.
+* Automatikusan érzékel több fajta formátumot (/me, /do, /ame).
 
-* It automatically detects whispering status and emotes in the chat and adjusts the line color accordingly.
-
-## Examples
-### Input
+## Példák
+### Bemenet
 
 ```
-John Doe mondja: Szép jó napot.
+[2026-03-19 08:00:00] [Output] : John Doe mondja: Szép jó napot.
 *** John Doe leül a földre.
 >> John Doe egy 25 éves férfi, 170 cm magas.
 John Doe mondja rádióba: Jó napot.
@@ -26,7 +25,7 @@ John Doe mondja a megafonba: Ez itt az LSPD!
 ((John Doe)) megaphone: Ez itt az LSPD!
 John Doe mondja: Jó napot.*megemeli kalapját* 
 ```
-##### Resulting image
+##### Eredmény kép
 
 ![emote example](https://i.imgur.com/H8mi5Wq.png)
 
