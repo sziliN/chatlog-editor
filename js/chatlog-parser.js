@@ -1,17 +1,25 @@
-﻿function useRegex(input) {
-    let regex = /([01]\d|2[0-3]):[0-5]\d:[0-5]\d/;
-    return regex.test(input);
+const logPrefix = /^\[\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}\]\s\[Output\]\s:\s/;
+
+function useRegex(input) {
+    return logPrefix.test(input);
 }
 
 $(document).ready(function() {
     function e() {
         $(".generated").remove(), $(".clear").remove();
-        for (var e = $("textarea").val().replace("<script>", "").replace("</script>", "").split("\n"), t = 0; t < e.length; t++)
+        
+        // Get lines from textarea
+        var lines = $("textarea").val().replace(/<script>|<\/script>/g, "").split("\n");
+
+        for (var t = 0; t < lines.length; t++) {
+            // If it matches the regex, remove the prefix; otherwise, keep the original line
+            let processedLine = useRegex(lines[t]) ? lines[t].replace(logPrefix, "") : lines[t];
+
             $(".output").append(
-                '<div class="generated" id="chatlogOutput">' +
-                (useRegex(e[t]) ? e[t].slice(10) : e[t].slice(0)) +
-                '</div><div class="clear"></div>'
+                '<div class="generated" id="chatlogOutput">' + processedLine + '</div><div class="clear"></div>'
             );
+        }
+        
         $(".generated").each(function() {
             var lines = $(this).text().split('\n');
             var formattedLines = [];
