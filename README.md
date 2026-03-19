@@ -28,7 +28,7 @@ John Doe mondja: Jó napot.*megemeli kalapját*
 ```
 ##### Resulting image
 
-![emote example](https://i.imgur.com/MOfBA6o.png)
+![emote example](https://i.imgur.com/H8mi5Wq.png)
 
 ***
 #### Credits
