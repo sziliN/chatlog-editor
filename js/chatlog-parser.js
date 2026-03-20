@@ -1,4 +1,4 @@
-const logPrefix = /^\[\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}\]\s\[Output\]\s:\s/;
+﻿const logPrefix = /^\[\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}\]\s\[Output\]\s:\s/;
 
 function useRegex(input) {
     return logPrefix.test(input);
@@ -62,8 +62,8 @@ $(document).ready(function() {
             formattedText.toLowerCase().indexOf(" suttogja:") >= 0 && $(this).addClass("grey");
             formattedText.toLowerCase().indexOf(" suttogva:") >= 0 && $(this).addClass("grey");
             formattedText.toLowerCase().indexOf(" (telefon):") >= 0 && $(this).addClass("whisper");
-            formattedText.toLowerCase().indexOf(" mondja a megafonba:") >= 0 && $(this).addClass("whisper");
-            formattedText.toLowerCase().indexOf(")) megaphone:") >= 0 && $(this).addClass("whisper");
+            formattedText.toLowerCase().indexOf(" mondja a megafonba:") >= 0 && $(this).addClass("megafon");
+            formattedText.toLowerCase().indexOf(")) megaphone:") >= 0 && $(this).addClass("megafon");
             formattedText.toLowerCase().indexOf(" mondja rádióba:") >= 0 && $(this).addClass("radio");
 
             $(this).html(formattedText); 

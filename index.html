@@ -1,179 +1,197 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="author" content="asapdev" />
-    <meta name="description" content="Log editor" />
-    <title>Log Editor</title>
 
-    <meta
-      name="keywords"
-      content="chat, log editor, log, editor"
-    />
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="asapdev" />
+  <meta name="description" content="Log editor" />
+  <title>Log Editor</title>
 
-    <link rel="stylesheet" href="css/boostrap.css" crossorigin="anonymous" />
-    <link href="css/sp-style.css" rel="stylesheet" />
-    <link href="css/app.css" rel="stylesheet" />
-    <link rel="icon" href="bloods.jpg" />
-  </head>
+  <meta name="keywords" content="chat, log editor, log, editor" />
 
-  <body>
-    <br />
+  <link rel="stylesheet" href="css/boostrap.css" crossorigin="anonymous" />
+  <link href="css/sp-style.css" rel="stylesheet" />
+  <link href="css/app.css" rel="stylesheet" />
+  <link rel="icon" href="bloods.jpg" />
+</head>
 
-    <div class="container">
-      <div class="row name">
-        <div class="col-xs-12">
-          <input type="hidden" class="form-control" id="name" />
-        </div>
+<body>
+  <br>
+  <div class="container-fluid p-0">
+    <div class="row g-0">
+      <div class="col">
+        <h3 style="text-align:center;font-weight:bold;">Log editor</h3>
       </div>
-      <br />
-      <div class="clog_settings">
-        <div class="row" id="bal">
-          <div class="col-xs-12 fill-container">
-            <label for="font-label">Betű mérete</label>
-            <input
-              name="font-label"
-              id="font-label"
-              type="number"
-              min="10"
-              max="64"
-              value="12"
-            />
-          </div>
-        </div>
-        <div class="row" id="jobb">
-          <div class="col-xs-12">
-            <input type="text" id="color-picker" class="color-picker-input" />
-          </div>
-        </div>
-      </div>
-
-      <br />
-
-      <center>
-        <div class="textarea-container">
-          <textarea
-            class="form-control textarea-input"
-            rows="15"
-            placeholder=""
-          ></textarea>
-        </div>
-        <br />
-        <div style="margin-top: 0px">
-          <button
-            id="downloadOutputTransparent"
-            class="btn btn-success float-right"
-          >
-            Letöltés
-          </button>
-        </div>
-      </center>
-
-      <br />
-      <div class="output" id="output"></div>
     </div>
-    <br <div="" class="col-xs-12" />
-    <br />
-    <script src="js/download-img.js"></script>
-    <script src="js/download.js"></script>
-    <script
-      src="js/app.js"
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    ></script>
-    <script>
-      $(document).ready(function () {
-        $("#downloadOutput").click(function () {
-          //generated").css("background-color", "transparent");
-          domtoimage
-            .toBlob(document.getElementById("output"))
-            .then(function (blob) {
-              window.saveAs(
-                blob,
-                new Date()
-                  .toLocaleString()
-                  .replaceAll(",", "_")
-                  .replaceAll(" ", "_")
-                  .replaceAll("/", "-")
-                  .replace("__", "_")
-                  .replaceAll(":", "-") +
-                  "_" +
-                  "chatlog.png"
-              );
-            })
-            .then(function (blob) {
-              $(".generated").css("background-color", "transparent");
-            });
-        });
-        $("#downloadOutputTransparent").click(function () {
-          $(".generated").css("background-color", "transparent");
-          domtoimage
-            .toBlob(document.getElementById("output"))
-            .then(function (blob) {
-              window.saveAs(
-                blob,
-                new Date()
-                  .toLocaleString()
-                  .replaceAll(",", "_")
-                  .replaceAll(" ", "_")
-                  .replaceAll("/", "-")
-                  .replace("__", "_")
-                  .replaceAll(":", "-") +
-                  "_" +
-                  "chatlog.png"
-              );
-            })
-            .then(function (blob) {
-              $(".generated").css("background-color", "transparent");
-            });
+    <div class="row g-0">
+      <div class="col">
+        <div class="examples">
+          <p style="font-size: 16; color: #aaa; margin-bottom: 10px;">Kattints a sorra a másoláshoz!</p>
+          <div class="preview-row">
+            <div class="copy-item" data-text="John Doe mondja: Szép jó napot.">
+              <small>Normál beszéd</small><br>
+              <span class="white">John Doe mondja: Szép jó napot.</span>
+            </div>
+            <div class="copy-item" data-text="*** John Doe leül a földre.">
+              <small>Cselekvés (/me)</small><br>
+              <span class="me">*** John Doe leül a földre.</span>
+            </div>
+            <div class="copy-item" data-text=">> John Doe egy 25 éves férfi, 170 cm magas.">
+              <small>Jellemzés (/ame)</small><br>
+              <span class="ame">>> John Doe egy 25 éves férfi, 170 cm magas.</span>
+            </div>
+            <div class="copy-item" data-text="John Doe mondja rádióba: Jó napot.">
+              <small>Rádió</small><br>
+              <span class="radio">John Doe mondja rádióba: Jó napot.</span>
+            </div>
+            <div class="copy-item" data-text="* A földön egy boombox található.">
+              <small>Történés (/do)</small><br>
+              <span class="do">* A földön egy boombox található.</span>
+            </div>
+            <div class="copy-item" data-text="John Doe suttogja: Szevasz.">
+              <small>Suttogás</small><br>
+              <span class="grey">John Doe suttogja: Szevasz.</span>
+            </div>
+            <div class="copy-item" data-text="John Doe suttogva: Szevasz.">
+              <small>Suttogva</small><br>
+              <span class="grey">John Doe suttogva: Szevasz.</span>
+            </div>
+            <div class="copy-item" data-text="John Doe mondja (telefon): Üdv eladó.">
+              <small>Telefon</small><br>
+              <span class="whisper">John Doe mondja (telefon): Üdv eladó.</span>
+            </div>
+            <div class="copy-item" data-text="John Doe mondja a megafonba: Ez itt az LSPD!">
+              <small>Megafon 1</small><br>
+              <span class="whisper">John Doe mondja a megafonba: Ez itt az LSPD!</span>
+            </div>
+            <div class="copy-item" data-text="((John Doe)) megaphone: Ez itt az LSPD!">
+              <small>Megafon 2</small><br>
+              <span class="whisper">((John Doe)) megaphone: Ez itt az LSPD!</span>
+            </div>
+            <div class="copy-item" data-text="John Doe mondja: Jó napot.*megemeli kalapját*">
+              <small>Beszéd + cselekvés</small><br>
+              <span class="white">John Doe mondja: Jó napot.<span class="me">*megemeli kalapját*</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-7">
+        <input type="hidden" class="form-control" id="name" />
+        <div class="row">
+          <div class="clog_settings">
+            <div class="row" id="bal">
+              <div class="col-xs-12 fill-container">
+                <label for="font-label">Betű mérete</label>
+                <input name="font-label" id="font-label" type="number" min="10" max="64" value="12" />
+              </div>
+            </div>
+            <div class="row" id="jobb">
+              <div class="col-xs-12">
+                <input type="text" id="color-picker" class="color-picker-input" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="textarea-container">
+            <textarea class="form-control textarea-input" rows="15"
+              placeholder="Ide jön a manuálisan készített vagy logból másolt RP szöveg."></textarea>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col d-flex justify-content-end p-0" style="margin-top: 20px">
+            <button id="downloadOutputTransparent" class="btn btn-success">
+              Letöltés
+            </button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="output" id="output"></div>
+        </div>
+      </div>
+      <div class="col">
+
+      </div>
+    </div>
+  </div>
+
+  <script src="js/download-img.js"></script>
+  <script src="js/download.js"></script>
+  <script src="js/app.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script>
+    $(document).ready(function () {
+      $("#downloadOutput").click(function () {
+        //generated").css("background-color", "transparent");
+        domtoimage
+          .toBlob(document.getElementById("output"))
+          .then(function (blob) {
+            window.saveAs(
+              blob,
+              new Date()
+                .toLocaleString()
+                .replaceAll(",", "_")
+                .replaceAll(" ", "_")
+                .replaceAll("/", "-")
+                .replace("__", "_")
+                .replaceAll(":", "-") +
+              "_" +
+              "chatlog.png"
+            );
+          })
+          .then(function (blob) {
+            $(".generated").css("background-color", "transparent");
+          });
+      });
+      $("#downloadOutputTransparent").click(function () {
+        $(".generated").css("background-color", "transparent");
+        domtoimage
+          .toBlob(document.getElementById("output"))
+          .then(function (blob) {
+            window.saveAs(
+              blob,
+              new Date()
+                .toLocaleString()
+                .replaceAll(",", "_")
+                .replaceAll(" ", "_")
+                .replaceAll("/", "-")
+                .replace("__", "_")
+                .replaceAll(":", "-") +
+              "_" +
+              "chatlog.png"
+            );
+          })
+          .then(function (blob) {
+            $(".generated").css("background-color", "transparent");
+          });
+      });
+    });
+  </script>
+  <script src="js/parse-text.js"></script>
+  <script src="js/chat.js"></script>
+  <script src="js/color-picker.js"></script>
+  <script src="js/chatlog-parser.js"></script>
+  <script>
+    document.querySelectorAll('.copy-item').forEach(item => {
+      item.addEventListener('click', function () {
+        const textToCopy = this.getAttribute('data-text');
+
+        navigator.clipboard.writeText(textToCopy).then(() => {
+          this.classList.add('copied');
+
+          // Remove feedback after 1 second
+          setTimeout(() => {
+            this.classList.remove('copied');
+          }, 1000);
+
+          console.log('Copied: ' + textToCopy);
+        }).catch(err => {
+          console.error('Failed to copy: ', err);
         });
       });
-    </script>
+    });
+  </script>
+</body>
 
-    <script src="js/parse-text.js"></script>
-    <script src="js/chat.js"></script>
-    <script src="js/color-picker.js"></script>
-    <script src="js/chatlog-parser.js"></script>
-
-    <div class="color-preview-footer">
-    <h3>Példák:</h3>
-    <div class="preview-row">
-        <div>
-            <span class="white">John Doe mondja: Szép jó napot.</span>
-        </div>
-        <div>
-            <span class="me">*** John Doe leül a földre.</span>
-        </div>
-        <div>
-            <span class="ame">>> John Doe egy 25 éves férfi, 170 cm magas.</span>
-        </div>
-        <div>
-            <span class="radio">John Doe mondja rádióba: Jó napot.</span>
-        </div>
-        <div>
-            <span class="do">* A földön egy boombox található.</span>
-        </div>
-        <div>
-            <span class="grey">John Doe suttogja: Szevasz.</span>
-        </div>
-        <div>
-            <span class="grey">John Doe suttogva: Szevasz.</span>
-        </div>
-        <div>
-            <span class="whisper">John Doe mondja (telefon): Üdv eladó.</span>
-        </div>
-        <div>
-            <span class="whisper">John Doe mondja a megafonba: Ez itt az LSPD!</span>
-        </div>
-        <div>
-            <span class="whisper">((John Doe)) megaphone: Ez itt az LSPD!</span>
-        </div>
-        <div>
-          <span class="white">John Doe mondja: Jó napot.<span class="me">*megemeli kalapját*</span></span>
-        </div>
-    </div>
-</div>
-  </body>
 </html>
