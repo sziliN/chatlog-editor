@@ -53,6 +53,9 @@ $(document).ready(function() {
             if (formattedText.toLowerCase().startsWith('***')) {
                 $(this).addClass("me");
             } 
+            else if(formattedText.toLowerCase().startsWith('* the time is')){
+                $(this).addClass("time")
+            }
             else if (formattedText.toLowerCase().startsWith('*')) {
                 $(this).addClass("do");
             }
